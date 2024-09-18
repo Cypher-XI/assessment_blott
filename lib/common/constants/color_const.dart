@@ -4,6 +4,7 @@ class BlottColors {
   ///
   static const Color splashBackgroundColor = Color(0xFF000000);
   static const Color lightScreenBackgroundColor = Color(0xFFF9FAFB);
+  static const Color darkScreenBackgroundColor = Color(0xFF000000);
 
   static const Color textTitleColor = Color(0xFF171717);
   static const Color textSubtitleTitleColor = Color(0xFF737373);
@@ -20,4 +21,6 @@ class BlottColors {
   static const Color buttonLabelColor = Color(0xFFFAFAFA);
 
   static const Color snackBarColor = Color(0xFF000000);
+
+  static const Color whiteColor = Color(0xFFFFFFFF);
 }

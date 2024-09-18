@@ -10,20 +10,24 @@ class BlottLabelCustom extends StatelessWidget {
     required this.title,
     required this.size,
     this.maxLines = 1,
+    this.color = BlottColors.textTitleColor,
+    this.fontWeight = FontWeight.w700,
   });
 
   final String title;
   final double size;
   final int maxLines;
+  final Color color;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
       style: GoogleFonts.roboto(
-        fontWeight: FontWeight.w700,
+        fontWeight: fontWeight,
         fontSize: size.sp,
-        color: BlottColors.textTitleColor,
+        color: color,
       ),
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,

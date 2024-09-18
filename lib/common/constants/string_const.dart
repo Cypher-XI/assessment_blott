@@ -30,4 +30,7 @@ class BlottStrings {
   /// Snackbar messages
   static const String snackBarMessageEnablePermission =
       'Please enable notifications in your settings to proceed further!';
+
+  static const String errorMessageFetchingNews =
+      'Something went wrong. Please try again later.';
 }

@@ -8,7 +8,8 @@ import 'package:go_router/go_router.dart';
 
 class AppRoutes {
   static GoRouter goRouter = GoRouter(
-    initialLocation: SplashScreen.routePath,
+    initialLocation: HomeScreen.routePath,
+    // initialLocation: SplashScreen.routePath,
     debugLogDiagnostics: true,
 
     ///
