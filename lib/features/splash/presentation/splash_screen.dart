@@ -1,11 +1,14 @@
-import 'package:assessment_blott/common/constants/color_const.dart';
-import 'package:assessment_blott/common/constants/image_const.dart';
+import '../../../common/constants/color_const.dart';
+import '../../../common/constants/image_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../authentication/presentation/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String routePath = '/splashScreen';
+  static const String routeName = 'splash-screen';
+
   const SplashScreen({super.key});
 
   @override
