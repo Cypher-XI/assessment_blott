@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:go_router/go_router.dart';
+
 import '../../../common/constants/color_const.dart';
 import '../../../common/constants/image_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../authentication/presentation/sign_in_screen.dart';
+import '../../onboarding/presentation/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routePath = '/splashScreen';
@@ -22,11 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInScreen()),
-      );
+    Timer(const Duration(seconds: 2), () {
+      GoRouter.of(context).pushReplacementNamed(OnboardingScreen.routeName);
     });
   }
 

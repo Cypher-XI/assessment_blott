@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routes/app_routes.dart';
 
@@ -11,15 +12,19 @@ class AppBlott extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Blott',
-      debugShowCheckedModeBanner: false,
-      routeInformationProvider: AppRoutes.goRouter.routeInformationProvider,
-      routeInformationParser: AppRoutes.goRouter.routeInformationParser,
-      routerDelegate: AppRoutes.goRouter.routerDelegate,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      child: MaterialApp.router(
+        title: 'Blott',
+        debugShowCheckedModeBanner: false,
+        routeInformationProvider: AppRoutes.goRouter.routeInformationProvider,
+        routeInformationParser: AppRoutes.goRouter.routeInformationParser,
+        routerDelegate: AppRoutes.goRouter.routerDelegate,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+          useMaterial3: true,
+        ),
       ),
     );
   }
