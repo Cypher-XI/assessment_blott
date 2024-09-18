@@ -68,18 +68,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               )
                   .when(
                 data: (data) {
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      return ref.refresh(fetchNewsFutureProvider);
+                  return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return NewsItemWidget(
+                        newsData: data[index],
+                      );
                     },
-                    child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return NewsItemWidget(
-                          newsData: data[index],
-                        );
-                      },
-                    ),
                   );
                 },
                 error: (error, stackTrace) {
