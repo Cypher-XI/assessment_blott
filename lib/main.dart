@@ -1,3 +1,4 @@
+import 'package:assessment_blott/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,17 +12,12 @@ class AppBlott extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Blott',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Blott APP',
-          ),
-        ),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
