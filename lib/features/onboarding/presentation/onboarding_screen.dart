@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -11,21 +12,22 @@ import '../../../common/constants/string_const.dart';
 import '../../../common/widgets/text_inputs/primary_input.dart';
 import '../../../common/widgets/text_labels/label_subtitle.dart';
 import '../../../common/widgets/text_labels/label_title.dart';
+import '../../../core/storage/secured_storage.dart';
 import 'notification_permission_screen.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends ConsumerStatefulWidget {
   static const String routePath = '/onboardingScreen';
   static const String routeName = 'onboarding-screen';
 
   const OnboardingScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<ConsumerStatefulWidget> createState() {
     return _OnboardingScreenState();
   }
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final nameFormKey = GlobalKey<FormState>();
 
   ///
@@ -118,9 +120,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           FocusScope.of(context).unfocus();
           if (nameFormKey.currentState!.validate()) {
+            ///
+            await Future.wait([
+              ref.read(securedStorageProvider).clearAllData(),
+              ref
+                  .read(securedStorageProvider)
+                  .storeFirstName(firstNameController.text),
+              ref
+                  .read(securedStorageProvider)
+                  .storeLastName(lastNameController.text),
+            ]);
+
             GoRouter.of(context)
                 .pushReplacementNamed(NotificationPermissionScreen.routeName);
           }

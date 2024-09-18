@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../common/constants/color_const.dart';
 import '../../../common/constants/string_const.dart';
 import '../../../common/widgets/text_labels/label_custom.dart';
+import '../../../core/storage/secured_storage.dart';
 import '../controller/home_controller.dart';
 import 'widgets/news_item_widget.dart';
 
@@ -33,17 +34,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.0.h,
-                vertical: 22.0.h,
-              ),
-              child: const BlottLabelCustom(
-                title: 'Hey {name here}',
-                size: 32.0,
-                fontWeight: FontWeight.w900,
-                color: BlottColors.whiteColor,
-              ),
+            FutureBuilder<String?>(
+              future: ref.read(securedStorageProvider).retrieveFirstName(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.done:
+                    if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    } else {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.0.h,
+                          vertical: 22.0.h,
+                        ),
+                        child: BlottLabelCustom(
+                          title: 'Hey ${snapshot.data}',
+                          size: 32.0,
+                          fontWeight: FontWeight.w900,
+                          color: BlottColors.whiteColor,
+                        ),
+                      );
+                    }
+                  case ConnectionState.waiting:
+                  default:
+                    return const SizedBox();
+                }
+              },
             ),
             Expanded(
               child: ref
