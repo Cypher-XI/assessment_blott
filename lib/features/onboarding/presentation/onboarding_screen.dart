@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,7 +29,8 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  final nameFormKey = GlobalKey<FormState>();
+  final nameFormKey = GlobalKey<FormBuilderState>();
+  bool validForm = false;
 
   ///
   final firstNameController = TextEditingController();
@@ -58,8 +60,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               SizedBox(
                 height: 16.0.h,
               ),
-              Form(
+              FormBuilder(
                 key: nameFormKey,
+                onChanged: () {
+                  setState(() {
+                    nameFormKey.currentState!.saveAndValidate();
+                    validForm = nameFormKey.currentState!.isValid;
+                  });
+                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   children: [
                     BlottInputPrimary(
@@ -67,7 +76,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       textInputTextEditController: firstNameController,
                       inputHint: BlottStrings.firstNameHint,
                       keyboardType: TextInputType.name,
-                      // textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.next,
                       autofocus: true,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -82,9 +91,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           errorText: BlottStrings.firstNameMaxLength,
                         ),
                       ]),
-                      onChanged: (value) {
-                        setState(() {});
-                      },
                     ),
                     SizedBox(
                       height: 8.0.h,
@@ -108,9 +114,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                           errorText: BlottStrings.lastNameMaxLength,
                         ),
                       ]),
-                      onChanged: (value) {
-                        setState(() {});
-                      },
                     ),
                   ],
                 ),
@@ -139,7 +142,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           }
         },
         shape: const CircleBorder(),
-        backgroundColor: (nameFormKey.currentState?.validate() ?? false)
+        backgroundColor: validForm
             ? BlottColors.enabledButtonColor
             : BlottColors.disabledButtonColor,
         elevation: 0.0,

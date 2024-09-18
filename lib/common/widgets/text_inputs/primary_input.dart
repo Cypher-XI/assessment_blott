@@ -45,7 +45,7 @@ class _BlottInputPrimaryState extends State<BlottInputPrimary> {
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
-      enableInteractiveSelection: false,
+      // enableInteractiveSelection: false,
       autofocus: widget.autofocus,
       name: widget.fieldName,
       controller: widget.textInputTextEditController,
@@ -54,7 +54,7 @@ class _BlottInputPrimaryState extends State<BlottInputPrimary> {
       textInputAction: widget.textInputAction,
       onSubmitted: widget.onSubmitted,
       textCapitalization: TextCapitalization.sentences,
-      autovalidateMode: AutovalidateMode.disabled,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         enabledBorder: underLineInputBorder(BlottColors.textInputBorderColor),
         focusedBorder: underLineInputBorder(BlottColors.textInputBorderColor),

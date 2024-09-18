@@ -76,7 +76,14 @@ class _NotificationPermissionScreenState
 
                         ///
                         case PermissionStatus.denied:
-                          Permission.notification.request();
+                          Permission.notification.request().then(
+                            (value) {
+                              if (value == PermissionStatus.granted) {
+                                GoRouter.of(context)
+                                    .pushReplacementNamed(HomeScreen.routeName);
+                              }
+                            },
+                          );
 
                         ///
                         case PermissionStatus.permanentlyDenied:
