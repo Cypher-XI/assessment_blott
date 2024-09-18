@@ -1,5 +1,6 @@
 import '../../common/widgets/route_undefined_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
+import '../../features/home/presentation/news_detail_screen.dart';
 import '../../features/onboarding/presentation/notification_permission_screen.dart';
 import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
@@ -40,6 +41,17 @@ class AppRoutes {
         path: HomeScreen.routePath,
         builder: (BuildContext context, GoRouterState state) {
           return const HomeScreen();
+        },
+      ),
+      GoRoute(
+        name: NewsDetailScreen.routeName,
+        path: NewsDetailScreen.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          final displaySiteUrl = state.extra as String;
+
+          return NewsDetailScreen(
+            displaySiteUrl: displaySiteUrl,
+          );
         },
       ),
     ],

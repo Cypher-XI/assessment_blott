@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common/constants/color_const.dart';
-import '../../../common/constants/dimens.dart';
 import '../../../common/constants/string_const.dart';
 import '../../../common/widgets/text_labels/label_custom.dart';
 import '../controller/home_controller.dart';
@@ -49,37 +48,41 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: ref
                   .watch(
-                    fetchNewsFutureProvider,
-                  )
+                fetchNewsFutureProvider,
+              )
                   .when(
-                    skipLoadingOnReload: false,
-                    data: (data) {
-                      return ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return NewsItemWidget(
-                            newsData: data[index],
-                          );
-                        },
-                      );
+                data: (data) {
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      return ref.refresh(fetchNewsFutureProvider);
                     },
-                    error: (error, stackTrace) {
-                      // debugPrint(error.toString());
-                      return const BlottLabelCustom(
-                        title: BlottStrings.errorMessageFetchingNews,
-                        size: 16.0,
-                        color: BlottColors.whiteColor,
-                        maxLines: 2,
-                      );
-                    },
-                    loading: () {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: BlottColors.whiteColor,
-                        ),
-                      );
-                    },
-                  ),
+                    child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return NewsItemWidget(
+                          newsData: data[index],
+                        );
+                      },
+                    ),
+                  );
+                },
+                error: (error, stackTrace) {
+                  // debugPrint(error.toString());
+                  return const BlottLabelCustom(
+                    title: BlottStrings.errorMessageFetchingNews,
+                    size: 16.0,
+                    color: BlottColors.whiteColor,
+                    maxLines: 2,
+                  );
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: BlottColors.whiteColor,
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
