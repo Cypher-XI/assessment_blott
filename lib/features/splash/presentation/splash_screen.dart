@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/color_const.dart';
@@ -38,6 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: SvgPicture.asset(
           BlottImages.blottLogo,
+          width: 134.26.w,
+          fit: BoxFit.fitWidth,
         ),
       ),
     );

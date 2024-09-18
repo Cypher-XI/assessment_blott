@@ -15,7 +15,9 @@ class BlottColors {
   static const Color textInputErrorBorderColor = Color(0xFFe10b0b);
   static const Color textInputBorderColor = Color(0xFFD4D4D4);
 
-  static Color disabledNextButtonColor =
-      const Color(0xFF523AE4).withOpacity(0.4);
-  static const Color enabledNextButtonColor = Color(0xFF523AE4);
+  static Color disabledButtonColor = const Color(0xFF523AE4).withOpacity(0.4);
+  static const Color enabledButtonColor = Color(0xFF523AE4);
+  static const Color buttonLabelColor = Color(0xFFFAFAFA);
+
+  static const Color snackBarColor = Color(0xFF000000);
 }

@@ -4,26 +4,29 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../constants/color_const.dart';
 
-class BlottLabelSubtitle extends StatelessWidget {
-  const BlottLabelSubtitle({
+class BlottLabelCustom extends StatelessWidget {
+  const BlottLabelCustom({
     super.key,
     required this.title,
-    this.textAlign,
+    required this.size,
+    this.maxLines = 1,
   });
 
   final String title;
-  final TextAlign? textAlign;
+  final double size;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
       style: GoogleFonts.roboto(
-        fontWeight: FontWeight.w400,
-        fontSize: 16.sp,
-        color: BlottColors.textSubtitleTitleColor,
+        fontWeight: FontWeight.w700,
+        fontSize: size.sp,
+        color: BlottColors.textTitleColor,
       ),
-      textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

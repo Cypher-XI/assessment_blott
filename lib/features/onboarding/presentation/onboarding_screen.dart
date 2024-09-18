@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../common/constants/color_const.dart';
 import '../../../common/constants/dimens.dart';
@@ -10,6 +11,7 @@ import '../../../common/constants/string_const.dart';
 import '../../../common/widgets/text_inputs/primary_input.dart';
 import '../../../common/widgets/text_labels/label_subtitle.dart';
 import '../../../common/widgets/text_labels/label_title.dart';
+import 'notification_permission_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const String routePath = '/onboardingScreen';
@@ -118,12 +120,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           FocusScope.of(context).unfocus();
-          if (nameFormKey.currentState!.validate()) {}
+          if (nameFormKey.currentState!.validate()) {
+            GoRouter.of(context)
+                .pushReplacementNamed(NotificationPermissionScreen.routeName);
+          }
         },
         shape: const CircleBorder(),
         backgroundColor: (nameFormKey.currentState?.validate() ?? false)
-            ? BlottColors.enabledNextButtonColor
-            : BlottColors.disabledNextButtonColor,
+            ? BlottColors.enabledButtonColor
+            : BlottColors.disabledButtonColor,
         elevation: 0.0,
         child: SvgPicture.asset(
           BlottIcons.chevronRight,
